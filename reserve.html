@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant Reservation</title>
+  <style>
+/* Reservation Form Section */
+.reservation-section {
+    background-color: #f8f5f2;
+    padding: 60px 20px;
+}
+
+.reservation-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #1a2639;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.reservation-section h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #d4af37;
+    margin: 10px auto 0;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #1a2639;
+    font-size: 1rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+fieldset {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #e3e8f0;
+}
+
+legend {
+    font-weight: bold;
+    color: #1a2639;
+}
+
+.menu-checkboxes {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-checkboxes label {
+    font-weight: normal;
+    margin: 5px 0;
+}
+
+#menuItemsContainer,
+#specialEventsSection,
+#categorySelector,
+.category-items {
+    display: none;
+}
+
+button {
+    margin-top: 25px;
+    background-color: #1a2639;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d4af37;
+    color: #1a2639;
+}
+
+
+#thankYou {
+    display: none;
+    text-align: center;
+    margin-top: 25px;
+    color: #28a745;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+  </style>
+</head>
+<body>
+<section class="reservation-section">
+  <h2>Bistro Elegante Reservation Form</h2>
+  <form id="reservationForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="people">No. of People:</label>
+    <input type="text" id="people" required>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
+
+    <label for="time">Time:</label>
+    <input type="time" id="time" required>
+
+    <label for="reservationType">Reservation Type:</label>
+    <select id="reservationType" required>
+      <option value="">--Select--</option>
+      <option value="table">Table Booking</option>
+      <option value="event">Special Event</option>
+    </select>
+
+    <!-- Optional Pre-Order Dropdown -->
+    <div id="categorySelector">
+      <label for="menuCategory">Select a Menu Category:</label>
+      <select id="menuCategory">
+        <option value="">--Choose Category--</option>
+        <option value="starters">Starters</option>
+        <option value="main">Main Course</option>
+        <option value="desserts">Desserts</option>
+        <option value="drinks">Drinks</option>
+      </select>
+    </div>
+
+    <!-- Menu Items by Category -->
+    <div id="menuItemsContainer">
+      <div class="category-items" id="startersItems">
+        <fieldset>
+          <legend>Starters</legend>
+          <div class="menu-checkboxes">
+            <label><input type="checkbox" name="menu" value="Bruschetta"> Bruschetta</label>
+            <label><input type="checkbox" name="menu" value="Garlic Bread"> Garlic Bread</label>
+            <label><input type="checkbox" name="menu" value="Chicken Wings"> Chicken Wings</label>
+            <label><input type="checkbox" name="menu" value="Stuffed Mushrooms"> Stuffed Mushrooms</label>
+            <label><input type="checkbox" name="menu" value="Deviled Eggs">Deviled Eggs</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="category-items" id="mainItems">
+        <fieldset>
+          <legend>Main Course</legend>
+          <div class="menu-checkboxes">
+            <label><input type="checkbox" name="menu" value="Spaghetti Carbonara"> Spaghetti Carbonara</label>
+            <label><input type="checkbox" name="menu" value="Grilled Chicken Alfredo"> Grilled Chicken Alfredo</label>
+            <label><input type="checkbox" name="menu" value="Margaherita Pizza"> Margaherita Pizza</label>
+            <label><input type="checkbox" name="menu" value="Lasagna"> Lasagna</label>
+            <label><input type="checkbox" name="menu" value="Shrimp Tacos"> Shrimp Tacos</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="category-items" id="dessertsItems">
+        <fieldset>
+          <legend>Desserts</legend>
+          <div class="menu-checkboxes">
+            <label><input type="checkbox" name="menu" value="Tiramisu">Tiramisu </label>
+            <label><input type="checkbox" name="menu" value="Choco Lava Cake"> Choco Lava Cake</label>
+            <label><input type="checkbox" name="menu" value="Apple Pie"> Apple Pie</label>
+            <label><input type="checkbox" name="menu" value="Banana Split"> Banana Split </label>
+            <label><input type="checkbox" name="menu" value="New York Cheesecake"> New York Cheesecake</label>
+            
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="category-items" id="drinksItems">
+        <fieldset>
+          <legend>Beverages</legend>
+          <div class="menu-checkboxes">
+            <label><input type="checkbox" name="menu" value="Strawberry Smoothie"> Strawberry Smoothie</label>
+            <label><input type="checkbox" name="menu" value="Orange Juice"> Orange Juice </label>
+            <label><input type="checkbox" name="menu" value="Peach Iced Tea"> Peach Iced Tea</label>
+            <label><input type="checkbox" name="menu" value="Hot Chocolate"> Hot Chocolate </label>
+            <label><input type="checkbox" name="menu" value="Fresh Lemonade"> Fresh Lemonade</label>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- Special Event Section -->
+    <div id="specialEventsSection">
+      <label for="eventType">Select Event:</label>
+      <select id="eventType" required>
+        <option value="">--Select Event--</option>
+        <option value="wine">Wine or Cocktail Tasting</option>
+        <option value="chef">Chef's Special Dinner</option>
+        <option value="sports">Sports Viewing Party</option>
+        <option value="charity">Charity/Fundraiser</option>
+        <option value="fusion">Fusion Food Festival</option>
+        <option value="candlelight">Candlelight Dinner</option>
+      </select>
+    </div>
+
+    <!-- Common preference field -->
+    <label for="preferences">Allergies / Preferences:</label>
+    <textarea id="preferences" rows="3" placeholder="Mention any allergies or food preferences..."></textarea>
+
+    <button type="submit">Submit Reservation</button>
+    <div id="thankYou">Thank you for your reservation! We look forward to serving you.</div>
+  </form>
+</section>
+
+<script>
+// Replace your existing JavaScript code with this:
+
+const reservationType = document.getElementById("reservationType");
+const menuItemsContainer = document.getElementById("menuItemsContainer");
+const specialEventsSection = document.getElementById("specialEventsSection");
+const categorySelector = document.getElementById("categorySelector");
+const categoryDropdown = document.getElementById("menuCategory");
+const categoryItems = document.querySelectorAll('.category-items');
+const form = document.getElementById("reservationForm");
+const eventTypeSelect = document.getElementById("eventType");
+
+// Initial setup
+reservationType.addEventListener("change", () => {
+  if (reservationType.value === "table") {
+    categorySelector.style.display = "block";
+    specialEventsSection.style.display = "none";
+    // Important: Remove the required attribute from event type when table is selected
+    eventTypeSelect.removeAttribute("required");
+  } else if (reservationType.value === "event") {
+    categorySelector.style.display = "none";
+    specialEventsSection.style.display = "block";
+    menuItemsContainer.style.display = "none";
+    // Add the required attribute back for event booking
+    eventTypeSelect.setAttribute("required", "");
+  } else {
+    categorySelector.style.display = "none";
+    specialEventsSection.style.display = "none";
+    menuItemsContainer.style.display = "none";
+    // Remove the required attribute when no option is selected
+    eventTypeSelect.removeAttribute("required");
+  }
+});
+
+categoryDropdown.addEventListener("change", () => {
+  // Hide all categories
+  categoryItems.forEach(item => item.style.display = "none");
+
+  // Show selected category
+  const selected = categoryDropdown.value;
+  if (selected) {
+    document.getElementById(selected + "Items").style.display = "block";
+    menuItemsContainer.style.display = "block";
+  } else {
+    menuItemsContainer.style.display = "none";
+  }
+});
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  
+  // Add validation here if needed
+  const nameValue = document.getElementById("name").value;
+  const emailValue = document.getElementById("email").value;
+  const peopleValue = document.getElementById("people").value;
+  const dateValue = document.getElementById("date").value;
+  const timeValue = document.getElementById("time").value;
+  
+  // Basic validation that the required fields are filled
+  if (!nameValue || !emailValue || !peopleValue || !dateValue || !timeValue) {
+    console.log("Please fill all required fields");
+    return;
+  }
+  
+  // Get selected menu items if any
+  const selectedItems = [];
+  document.querySelectorAll('input[name="menu"]:checked').forEach(item => {
+    selectedItems.push(item.value);
+  });
+  console.log("Selected preorder items:", selectedItems);
+  
+  // Debugging
+  console.log("Form submitted successfully, redirecting to thank you page");
+  
+  // Redirect to thank you page
+  window.location.href = "thankyou.html";
+});
+</script>
+</body>
+</html>

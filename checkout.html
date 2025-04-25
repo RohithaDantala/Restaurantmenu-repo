@@ -1,0 +1,240 @@
+DOCTY<!PE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - Coffee Shop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  
+    body {
+      background-color: #f8f5f2;
+      color: #333;
+      line-height: 1.6;
+    }
+  
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+  
+    header {
+      background-color: #1a2639; /* Dark blue */
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  
+    .logo {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+  
+    .tagline {
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+  
+    .checkout-form {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+  
+    .checkout-title {
+      font-size: 1.8rem;
+      color: #1a2639; /* Dark blue */
+      margin-bottom: 25px;
+      text-align: center;
+    }
+  
+    .form-group {
+      margin-bottom: 20px;
+    }
+  
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #1a2639; /* Dark blue */
+    }
+  
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+  
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+  
+    .input-row {
+      display: flex;
+      gap: 15px;
+    }
+  
+    .input-row .form-group {
+      flex: 1;
+    }
+  
+    .order-summary {
+      background-color: #e3e8f0; /* Light bluish-gray */
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+  
+    .summary-title {
+      font-size: 1.2rem;
+      color: #1a2639; /* Dark blue */
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+  
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed #ddd;
+    }
+  
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0 5px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #1a2639; /* Dark blue */
+    }
+  
+    .checkout-btn {
+      background-color: #1a2639; /* Dark blue */
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+  
+    .checkout-btn:hover {
+      background-color: #d4af37; /* Gold */
+      color: #1a2639;
+    }
+  
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #1a2639;
+      text-decoration: none;
+    }
+  
+    .back-link:hover {
+      text-decoration: underline;
+      color: #d4af37;
+    }
+  </style>
+  
+</head>
+<body>
+  <header>
+    <div class="logo">Bistro Elegante</div>
+    <div class="tagline">Contemporary dining with charm</div>
+  </header>
+
+  <div class="container">
+    <form action="thankyouu.html" method="get" id="checkout-form" class="checkout-form">
+      <div class="checkout-title">Checkout</div>
+
+      <div class="input-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tablenumber">Table Number</label>
+        <input type="text" id="tablenumber" name="tablenumber" required />
+      </div>
+
+      <div class="form-group">
+        <label for="preferences">Preferences or Allergies</label>
+        <textarea id="preferences" name="preferences" placeholder="Please let us know about any dietary restrictions, allergies, or special requests..."></textarea>
+      </div>
+
+      <div class="order-summary">
+        <div class="summary-title">Order Summary</div>
+        <div id="order-summary-items"></div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span id="order-total">$0.00</span>
+        </div>
+      </div>
+
+      <button type="submit" class="checkout-btn">Complete Order</button>
+      <a href="menuuu.html" class="back-link">← Back to Menu</a>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const cartTotal = localStorage.getItem('cartTotal') || '0.00';
+      const orderSummaryItems = document.getElementById('order-summary-items');
+      const orderTotal = document.getElementById('order-total');
+
+      orderSummaryItems.innerHTML = '';
+
+      if (cartItems.length === 0) {
+        orderSummaryItems.innerHTML = '<p>No items in cart. Please add items before checkout.</p>';
+        orderTotal.textContent = '$0.00';
+        return;
+      }
+
+      cartItems.forEach(item => {
+        const itemTotal = (item.price * item.quantity).toFixed(2);
+        const itemElement = document.createElement('div');
+        itemElement.className = 'summary-item';
+        itemElement.innerHTML = `
+          <span>${item.name} (${item.quantity})</span>
+          <span>$${itemTotal}</span>
+        `;
+        orderSummaryItems.appendChild(itemElement);
+      });
+
+      orderTotal.textContent = `$${cartTotal}`;
+
+      const checkoutForm = document.getElementById('checkout-form');
+      checkoutForm.addEventListener('submit', function () {
+        localStorage.setItem('customerName',
+          document.getElementById('firstName').value + ' ' +
+          document.getElementById('lastName').value
+        );
+        localStorage.setItem('tableNumber', document.getElementById('tablenumber').value);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Decorative frame -->
+  <rect x="100" y="75" width="300" height="150" rx="0" fill="none" stroke="#d4af37" stroke-width="2"/>
+  
+  <!-- Elegant B monogram -->
+  <path d="M170,125 C170,125 190,125 200,125 C215,125 225,135 225,145 C225,155 215,165 200,165 C190,165 170,165 170,165 L170,125 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+  <path d="M170,145 C170,145 190,145 197,145 C207,145 215,155 215,165 C215,175 207,185 197,185 C190,185 170,185 170,185 L170,145 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+  
+  <!-- E monogram -->
+  <path d="M330,125 L270,125 L270,185 L330,185 M270,155 L320,155" stroke="#d4af37" stroke-width="2" fill="none"/>
+  
+  <!-- Main restaurant name -->
+  <text x="250" y="220" font-family="'Playfair Display', serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#1a2639">BISTRO ELEGANTE</text>
+  
+  <!-- Divider -->
+  <line x1="180" y1="235" x2="320" y2="235" stroke="#d4af37" stroke-width="1"/>
+  
+  <!-- Tagline -->
+  <text x="250" y="255" font-family="'Poppins', sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#5d6d7e">Contemporary dining with classic charm</text>
+</svg>

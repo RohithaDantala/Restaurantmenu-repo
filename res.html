@@ -1,1 +1,667 @@
-<div>html</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bistro Elegante</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #ffffff;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #1a2639;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Modified header container to use flexbox for alignment */
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Left side content */
+        .header-left {
+            text-align: left;
+        }
+        
+        /* Right side logo */
+        .logo {
+            text-align: right;
+        }
+        
+        /* Text logo styling */
+        .text-logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            margin-bottom: 10px;
+            font-weight: 300;
+            color: #d0d8e4;
+        }
+
+        /* Logo image styling */
+        .logo img {
+            max-width: 300px;
+            height: auto;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+        .nav-item {
+            color: #1a2639;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .nav-item:hover {
+            background-color: #e3e8f0;
+            color: #3a556a;
+        }
+
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 30px auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+        .slideshow-slide {
+            display: none;
+            width: 100%;
+            height: 400px;
+            background-position: center;
+            background-size: cover;
+            animation: fade 1.5s;
+        }
+        .slideshow-active {
+            display: block;
+        }
+        .slideshow-title {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2rem;
+            color: #1a2639;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        .slideshow-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #d4af37;
+            margin: 10px auto;
+        }
+        .slideshow-prev, .slideshow-next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(26, 38, 57, 0.5);
+        }
+        .slideshow-next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .slideshow-prev:hover, .slideshow-next:hover {
+            background-color: rgba(26, 38, 57, 0.8);
+        }
+        .slideshow-dot-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .slideshow-dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #d4d4d4;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .slideshow-active-dot, .slideshow-dot:hover {
+            background-color: #1a2639;
+        }
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        /* Chef Section */
+        .chef-section {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+        .chef-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .chef-card {
+            flex: 1 1 300px;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .chef-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .chef-image {
+            height: 250px;
+            width: 100%;
+            background-color: #eee;
+            background-position: center;
+            background-size: cover;
+        }
+        .chef-content {
+            padding: 25px;
+        }
+        .chef-name {
+            font-size: 1.5rem;
+            color: #1a2639;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        .chef-title {
+            font-size: 1rem;
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .chef-bio {
+            color: #5d6d7e;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #1a2639;
+            color: white;
+            padding: 70px 0;
+            text-align: center;
+        }
+        .contact-info {
+            margin-top: 30px;
+        }
+        .info-item {
+            margin: 15px 0;
+            color: #d0d8e4;
+        }
+        .info-item strong {
+            color: #d4af37;
+            margin-right: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f1724;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Special Events Section */
+        .special-events-section {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .event-card {
+            flex: 1 1 300px;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-image {
+            height: 350px;
+            width: 100%;
+            background-color: #eee;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .event-content {
+            padding: 30px;
+        }
+
+        .event-name {
+            font-size: 1.5rem;
+            color: #1a2639;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .event-desc {
+            font-size: 1rem;
+            color: #5d6d7e;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #d4af37;
+            color: #1a2639;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background-color: #1a2639;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Additional styling for the single combined card */
+        .single-card {
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        #about {
+            scroll-margin-top: 100px;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Add responsive styling */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            .slideshow-container {
+                height: 300px;
+            }
+            .slideshow-slide {
+                height: 300px;
+            }
+            .chef-card {
+                flex: 1 1 100%;
+            }
+                                
+                /* Modified header container to use flexbox for alignment */
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Center content */
+        .header-center {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        /* Left side logo */
+        .logo {
+            text-align: left;
+        }
+
+        /* Text logo styling */
+        .text-logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-style: italic;
+            margin-bottom: 10px;
+            font-weight: 300;
+            color: #d0d8e4;
+        }
+
+        /* For responsive design */
+        @media (max-width: 768px) {
+            /* Responsive header for mobile */
+            header .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header-center {
+                text-align: center;
+                margin-top: 15px;
+            }
+            
+            .logo {
+                text-align: center;
+            }
+            
+            .placeholder {
+                display: none;
+            }
+        }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with restructured content -->
+    <header>
+        <div class="container">
+            <!-- Left side logo -->
+            <div class="logo">
+                <img src="BistroEleganteLogo.svg" alt="Bistro Elegante" width="300">
+            </div>
+            
+            <!-- Center content -->
+            <div class="header-center">
+                <div class="text-logo">Bistro Elegante</div>
+                <p class="tagline">Contemporary dining with classic charm</p>
+            </div>
+            
+            <!-- Empty div to balance the layout -->
+            <div class="placeholder" style="width: 300px;"></div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#about" class="nav-item">About</a>
+                <a href="menuuu.html" class="nav-item menu-link">Menu</a>
+                <a href="#special-events" class="nav-item">Reservation</a>
+                <a href="#contact" class="nav-item">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Restaurant Slideshow -->
+    <section id="about" class="container">
+    <div class="container">
+        <h2 class="slideshow-title" id="restaurant">Our Restaurant</h2>
+        <div class="slideshow-container restaurant-slideshow">
+            <div class="slideshow-slide slideshow-active" style="background-image: url('https://wallpapercave.com/wp/wp2038191.jpg'); background-position: center;">
+            </div>
+            <div class="slideshow-slide" style="background-image: url('https://wallpaperaccess.com/full/3692584.jpg'); background-position: center;">
+            </div>
+            <div class="slideshow-slide" style="background-image: url('https://wallpapercave.com/wp/wp1874155.jpg'); background-position: center;">
+            </div>
+            <a class="slideshow-prev" onclick="changeSlide(-1, 'restaurant')">&#10094;</a>
+            <a class="slideshow-next" onclick="changeSlide(1, 'restaurant')">&#10095;</a>
+        </div>
+        <div class="slideshow-dot-container restaurant-dots">
+            <span class="slideshow-dot slideshow-active-dot" onclick="currentSlide(0, 'restaurant')"></span>
+            <span class="slideshow-dot" onclick="currentSlide(1, 'restaurant')"></span>
+            <span class="slideshow-dot" onclick="currentSlide(2, 'restaurant')"></span>
+        </div>
+    </div>
+
+    <!-- Dishes Slideshow -->
+    <div class="container">
+        <h2 class="slideshow-title" id="dishes">Our Dishes</h2>
+        <div class="slideshow-container dishes-slideshow">
+            <div class="slideshow-slide slideshow-active" style="background-image: url('main1.jpg'); background-position: center;">
+            </div>
+            <div class="slideshow-slide" style="background-image: url('dessert3.jpg'); background-position: center;">
+            </div>
+            <div class="slideshow-slide" style="background-image: url('starter1.jpg'); background-position: center;">
+            </div>
+            <a class="slideshow-prev" onclick="changeSlide(-1, 'dishes')">&#10094;</a>
+            <a class="slideshow-next" onclick="changeSlide(1, 'dishes')">&#10095;</a>
+        </div>
+        <div class="slideshow-dot-container dishes-dots">
+            <span class="slideshow-dot slideshow-active-dot" onclick="currentSlide(0, 'dishes')"></span>
+            <span class="slideshow-dot" onclick="currentSlide(1, 'dishes')"></span>
+            <span class="slideshow-dot" onclick="currentSlide(2, 'dishes')"></span>
+        </div>
+    </div>
+    </section>
+    
+    <!-- Chef Section -->
+    <section id="chefs" class="chef-section">
+        <div class="container">
+            <h2 class="slideshow-title">Meet Our Chefs</h2>
+            <div class="chef-container">
+                <!-- Chef 1 -->
+                <div class="chef-card">
+                    <div class="chef-image" style="background-image: url('https://th.bing.com/th/id/OIP.9JII3unAbNk0bB5UWBNFrAHaFk?rs=1&pid=ImgDetMain')"></div>
+                    <div class="chef-content">
+                        <h3 class="chef-name">Chef Luca Marin</h3>
+                        <h4 class="chef-title">Executive Chef</h4>
+                        <p class="chef-bio">Trained in Naples, Chef Luca specializes in rustic Italian and Mediterranean cuisine. His handmade pastas, wood-fired pizzas, and rich risottos bring authentic coastal flavors to every plate.</p>
+                    </div>
+                </div>
+
+                <!-- Chef 2 -->
+                <div class="chef-card">
+                    <div class="chef-image" style="background-image: url('https://media.timeout.com/images/102953836/750/562/image.jpg')"></div>
+                    <div class="chef-content">
+                        <h3 class="chef-name">Chef Sofia Klein</h3>
+                        <h4 class="chef-title">Pastry Chef</h4>
+                        <p class="chef-bio">A graduate of Le Cordon Bleu Paris, Chef Sofia crafts delicate pastries and classic French desserts. Her specialties include buttery croissants, crème brûlée, and seasonal fruit tarts.</p>
+                    </div>
+                </div>
+
+                <!-- Chef 3 -->
+                <div class="chef-card">
+                    <div class="chef-image" style="background-image: url('https://thelatch.com.au/wp-content/uploads/2024/04/MasterChef-Australia-Harry-2024.jpg?w=900')"></div>
+                    <div class="chef-content">
+                        <h3 class="chef-name">Chef Harry Reyes</h3>
+                        <h4 class="chef-title">Sous Chef</h4>
+                        <p class="chef-bio">Chef Harry brings vibrant Latin American flavors to the kitchen with his bold taco creations, juicy chimichurri steaks, and hand-folded empanadas. He's passionate about fusing street-style flair with fine dining.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Combined Reservation Options Card -->
+    <section id="special-events" class="special-events-section">
+        <div class="container">
+            <h2 class="slideshow-title">Ready to Dine with Us?</h2>
+            <div class="event-card single-card">
+                <div class="event-image" style="background-image: url('img1.jpg'); height: 300px;"></div>
+                <div class="event-content">
+                    <h3 class="event-name">Choose Your Dining Experience</h3>
+                    <p class="event-desc">Would you like to book a cozy table or join one of our exclusive special events?</p>
+                    <div class="cta-group">
+                        <a href="reserve.html" class="cta-button">Book a Table or Reserve for Event</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Visit Us</h2>
+            <div class="contact-info">
+                <div class="info-item">
+                    <strong>Address:</strong> 123 Restaurant Street, City, Country
+                </div>
+                <div class="info-item">
+                    <strong>Phone:</strong> (123) 456-7890
+                </div>
+                <div class="info-item">
+                    <strong>Hours:</strong> Monday-Friday: 11am-10pm | Saturday-Sunday: 10am-11pm
+                </div>
+                <div class="info-item">
+                    <strong>Email:</strong> info@bistroelegante.com
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bistro Elegante. All rights reserved.</p>
+        </div>
+    </footer>
+                        
+    <!-- JavaScript -->
+    <script>
+    // Slideshow functionality
+    let restaurantSlideIndex = 0;
+    let dishesSlideIndex = 0;
+                        
+    // Initialize all slideshows when the page loads
+    window.onload = function() {
+        showSlides(restaurantSlideIndex, 'restaurant');
+        showSlides(dishesSlideIndex, 'dishes');
+    };
+                        
+    // Next/previous controls
+    function changeSlide(n, type) {
+        if (type === 'restaurant') {
+            showSlides(restaurantSlideIndex += n, type);
+        } else if (type === 'dishes') {
+            showSlides(dishesSlideIndex += n, type);
+        }
+    }
+                        
+    // Thumbnail controls
+    function currentSlide(n, type) {
+        if (type === 'restaurant') {
+            showSlides(restaurantSlideIndex = n, type);
+        } else if (type === 'dishes') {
+            showSlides(dishesSlideIndex = n, type);
+        }
+    }
+                        
+    function showSlides(n, type) {
+        let i;
+        let slides = document.getElementsByClassName(type + "-slideshow")[0].getElementsByClassName("slideshow-slide");
+        let dots = document.getElementsByClassName(type + "-dots")[0].getElementsByClassName("slideshow-dot");
+                          
+        // Reset index if it goes beyond bounds
+        if (n >= slides.length) {
+            if (type === 'restaurant') {
+                restaurantSlideIndex = 0;
+            } else if (type === 'dishes') {
+                dishesSlideIndex = 0;
+            }
+        }
+        if (n < 0) {
+            if (type === 'restaurant') {
+                restaurantSlideIndex = slides.length - 1;
+            } else if (type === 'dishes') {
+                dishesSlideIndex = slides.length - 1;
+            }
+        }
+                          
+        // Hide all slides
+        for (i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("slideshow-active");
+        }
+                          
+        // Remove active status from all dots
+        for (i = 0; i < dots.length; i++) {
+            dots[i].classList.remove("slideshow-active-dot");
+        }
+                          
+        // Show the active slide and dot
+        let activeIndex = (type === 'restaurant') ? restaurantSlideIndex : dishesSlideIndex;
+        slides[activeIndex].classList.add("slideshow-active");
+        dots[activeIndex].classList.add("slideshow-active-dot");
+    }
+    </script>
+</body>
+</html>
